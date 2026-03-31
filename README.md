@@ -1,5 +1,3 @@
-# SWARA-AI-Powered-Mood-Based-Music-Recommendation-System
-
 # SWARA - AI-Powered Mood-Based Music Recommendation System
 
 A sophisticated web application that detects user moods through interactive modules and recommends personalized music based on emotional states.
