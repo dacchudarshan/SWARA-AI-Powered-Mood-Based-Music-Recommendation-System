@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Quiz - SWARA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="{{ url_for('dashboard') }}">
+                        <i class="fas fa-headphones"></i>
+                        <span>SWARA</span>
+                    </a>
+                </div>
+                <div class="nav-user">
+                    <span class="welcome-text">Welcome, {{ session.get('username', 'User') }}!</span>
+                    <a href="{{ url_for('dashboard') }}" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="quiz-container">
+                <header class="quiz-header">
+                    <h1><i class="fas fa-question-circle"></i> Mood Quiz</h1>
+                    <p>Answer these questions to help us understand your current emotional state</p>
+                </header>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions -->
+                <div class="quiz-questions" id="quizQuestions">
+                    <!-- Question 1 -->
+                    <div class="question active" id="question1">
+                        <h2>How are you feeling right now?</h2>
+                        <div class="options">
+                            <button class="option" data-mood="Happy">
+                                <i class="fas fa-smile"></i>
+                                <span>Energetic and positive</span>
+                            </button>
+                            <button class="option" data-mood="Sad">
+                                <i class="fas fa-frown"></i>
+                                <span>Down and melancholic</span>
+                            </button>
+                            <button class="option" data-mood="Angry">
+                                <i class="fas fa-angry"></i>
+                                <span>Frustrated and irritated</span>
+                            </button>
+                            <button class="option" data-mood="Depressed">
+                                <i class="fas fa-meh"></i>
+                                <span>Empty and unmotivated</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question" id="question2">
+                        <h2>What would you rather do right now?</h2>
+                        <div class="options">
+                            <button class="option" data-mood="Happy">
+                                <i class="fas fa-running"></i>
+                                <span>Dance or exercise</span>
+                            </button>
+                            <button class="option" data-mood="Sad">
+                                <i class="fas fa-bed"></i>
+                                <span>Stay in bed and reflect</span>
+                            </button>
+                            <button class="option" data-mood="Angry">
+                                <i class="fas fa-fist-raised"></i>
+                                <span>Punch something or scream</span>
+                            </button>
+                            <button class="option" data-mood="Depressed">
+                                <i class="fas fa-couch"></i>
+                                <span>Nothing, just sit quietly</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question" id="question3">
+                        <h2>How is your energy level?</h2>
+                        <div class="options">
+                            <button class="option" data-mood="Happy">
+                                <i class="fas fa-bolt"></i>
+                                <span>High and vibrant</span>
+                            </button>
+                            <button class="option" data-mood="Sad">
+                                <i class="fas fa-tint"></i>
+                                <span>Low but emotional</span>
+                            </button>
+                            <button class="option" data-mood="Angry">
+                                <i class="fas fa-fire"></i>
+                                <span>High but tense</span>
+                            </button>
+                            <button class="option" data-mood="Depressed">
+                                <i class="fas fa-battery-empty"></i>
+                                <span>Very low and drained</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question" id="question4">
+                        <h2>How do you feel about the future?</h2>
+                        <div class="options">
+                            <button class="option" data-mood="Happy">
+                                <i class="fas fa-star"></i>
+                                <span>Excited and optimistic</span>
+                            </button>
+                            <button class="option" data-mood="Sad">
+                                <i class="fas fa-cloud"></i>
+                                <span>Uncertain and worried</span>
+                            </button>
+                            <button class="option" data-mood="Angry">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Frustrated and impatient</span>
+                            </button>
+                            <button class="option" data-mood="Depressed">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Hopeless and indifferent</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question" id="question5">
+                        <h2>What's your current stress level?</h2>
+                        <div class="options">
+                            <button class="option" data-mood="Happy">
+                                <i class="fas fa-peace"></i>
+                                <span>Low - feeling relaxed</span>
+                            </button>
+                            <button class="option" data-mood="Sad">
+                                <i class="fas fa-weight"></i>
+                                <span>Moderate - feeling heavy</span>
+                            </button>
+                            <button class="option" data-mood="Angry">
+                                <i class="fas fa-bomb"></i>
+                                <span>High - feeling overwhelmed</span>
+                            </button>
+                            <button class="option" data-mood="Depressed">
+                                <i class="fas fa-ghost"></i>
+                                <span>Numb - feeling nothing</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="quiz-navigation">
+                    <button class="nav-btn" id="prevBtn" disabled>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn primary" id="nextBtn" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section hidden" id="resultsSection">
+                    <div class="mood-result">
+                        <h2><i class="fas fa-chart-pie"></i> Your Mood Analysis</h2>
+                        <div class="mood-breakdown">
+                            <div class="mood-item">
+                                <span class="mood-label">Detected Mood:</span>
+                                <span class="mood-value" id="detectedMood">Happy</span>
+                            </div>
+                            <div class="mood-confidence">
+                                <span class="confidence-label">Confidence:</span>
+                                <span class="confidence-value" id="confidenceLevel">85%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn primary" id="getRecommendations">
+                            <i class="fas fa-music"></i> Get Music Recommendations
+                        </button>
+                        <button class="action-btn secondary" id="retakeQuiz">
+                            <i class="fas fa-redo"></i> Retake Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div class="loading hidden" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your mood...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</body>
+</html>

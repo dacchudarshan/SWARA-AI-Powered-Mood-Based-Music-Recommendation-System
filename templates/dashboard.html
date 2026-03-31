@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SWARA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <i class="fas fa-headphones"></i>
+                    <span>SWARA</span>
+                </div>
+                <div class="nav-user">
+                    <span class="welcome-text">Welcome, {{ username }}!</span>
+                    <div class="user-menu">
+                        <button class="user-btn" onclick="toggleUserMenu()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div class="user-dropdown hidden" id="userDropdown">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                Profile
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="{{ url_for('logout') }}" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-dashboard">
+                <div class="hero-content">
+                    <h1>Choose Your Mood Discovery Method</h1>
+                    <p>Select the approach that feels right for you today. Each method will analyze your mood and recommend the perfect music.</p>
+                </div>
+                
+                <!-- Floating Music Elements -->
+                <div class="floating-elements">
+                    <div class="music-note note-1"><i class="fas fa-music"></i></div>
+                    <div class="music-note note-2"><i class="fas fa-music"></i></div>
+                    <div class="music-note note-3"><i class="fas fa-music"></i></div>
+                </div>
+            </section>
+
+            <!-- Method Selection -->
+            <section class="methods-section">
+                <div class="methods-grid">
+                    <!-- Quiz Method -->
+                    <div class="method-card quiz-card" onclick="selectMethod('quiz')">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <div class="method-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="method-badge">Most Popular</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Interactive Quiz</h3>
+                            <p>Answer personalized questions about your current feelings and emotional state</p>
+                            
+                            <div class="method-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>2-3 minutes</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Psychological</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>95% Accuracy</span>
+                                </div>
+                            </div>
+
+                            <div class="preview-questions">
+                                <small>Sample questions:</small>
+                                <ul>
+                                    <li>"How are you feeling right now?"</li>
+                                    <li>"What would you rather do?"</li>
+                                    <li>"Describe your energy level"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="method-btn">
+                                <span>Start Quiz</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image Method -->
+                    <div class="method-card images-card" onclick="selectMethod('images')">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <div class="method-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="method-badge">Visual</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Visual Selection</h3>
+                            <p>Choose from beautiful images that represent different moods and emotions</p>
+                            
+                            <div class="method-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>1-2 minutes</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Intuitive</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-palette"></i>
+                                    <span>Artistic</span>
+                                </div>
+                            </div>
+
+                            <div class="preview-images">
+                                <div class="mini-image"><i class="fas fa-sun"></i></div>
+                                <div class="mini-image"><i class="fas fa-cloud-rain"></i></div>
+                                <div class="mini-image"><i class="fas fa-bolt"></i></div>
+                                <div class="mini-image"><i class="fas fa-moon"></i></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="method-btn">
+                                <span>Choose Images</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Puzzle Method -->
+                    <div class="method-card puzzle-card" onclick="selectMethod('puzzle')">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <div class="method-icon">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="method-badge">Innovative</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Behavior Puzzle</h3>
+                            <p>Play an engaging puzzle game while we analyze your behavioral patterns</p>
+                            
+                            <div class="method-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>3-5 minutes</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-gamepad"></i>
+                                    <span>Interactive</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-microscope"></i>
+                                    <span>Scientific</span>
+                                </div>
+                            </div>
+
+                            <div class="puzzle-preview">
+                                <div class="mini-grid">
+                                    <div class="mini-tile">1</div>
+                                    <div class="mini-tile">2</div>
+                                    <div class="mini-tile">3</div>
+                                    <div class="mini-tile">4</div>
+                                </div>
+                                <small>Remove tiles in order</small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="method-btn">
+                                <span>Play Puzzle</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity (Future Enhancement) -->
+            <section class="recent-activity">
+                <h2><i class="fas fa-history"></i> Your Music Journey</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon happy">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h4>Happy Vibes</h4>
+                            <p>Last detected mood</p>
+                            <small>2 hours ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h4>12 Songs</h4>
+                            <p>Recommended today</p>
+                            <small>Various moods</small>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h4>85% Match</h4>
+                            <p>Average accuracy</p>
+                            <small>This week</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

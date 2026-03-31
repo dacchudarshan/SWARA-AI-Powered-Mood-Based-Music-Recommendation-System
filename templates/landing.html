@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWARA - Discover Music That Matches Your Soul</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-container">
+        <!-- Animated Background -->
+        <div class="background-animation">
+            <div class="floating-notes">
+                <i class="fas fa-music note1"></i>
+                <i class="fas fa-music note2"></i>
+                <i class="fas fa-music note3"></i>
+                <i class="fas fa-music note4"></i>
+                <i class="fas fa-music note5"></i>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-brand">
+                <i class="fas fa-headphones"></i>
+                <span>SWARA</span>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('signin') }}" class="nav-link">Sign In</a>
+                <a href="{{ url_for('signup') }}" class="nav-link btn-primary">Get Started</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Discover Music That 
+                    <span class="gradient-text">Matches Your Soul</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Experience the magic of personalized music recommendations based on your unique mood. 
+                    Let SWARA understand your emotions and curate the perfect soundtrack for your life.
+                </p>
+                
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-brain"></i>
+                        <span>Smart Mood Detection</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-music"></i>
+                        <span>Personalized Playlists</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <span>Emotional Connection</span>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Start Your Journey
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary btn-large">
+                        <i class="fas fa-play"></i>
+                        See How It Works
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="music-visualization">
+                    <div class="sound-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <div class="vinyl-record">
+                        <div class="vinyl-center"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="section-header">
+                <h2>Choose Your Path to Perfect Music</h2>
+                <p>Select one method that resonates with you most</p>
+            </div>
+
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Interactive Quiz</h3>
+                    <p>Answer thoughtful questions about your current emotional state and preferences</p>
+                    <div class="method-features">
+                        <span class="feature-tag">Quick</span>
+                        <span class="feature-tag">Personal</span>
+                        <span class="feature-tag">Accurate</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Visual Selection</h3>
+                    <p>Choose from carefully curated images that represent different moods and emotions</p>
+                    <div class="method-features">
+                        <span class="feature-tag">Intuitive</span>
+                        <span class="feature-tag">Visual</span>
+                        <span class="feature-tag">Expressive</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Behavior Puzzle</h3>
+                    <p>Play an engaging puzzle game while we analyze your behavior patterns</p>
+                    <div class="method-features">
+                        <span class="feature-tag">Fun</span>
+                        <span class="feature-tag">Innovative</span>
+                        <span class="feature-tag">Scientific</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="section-header">
+                <h2>Why Choose SWARA?</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4>Privacy First</h4>
+                    <p>Your emotional data is secure and never shared</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightning-bolt"></i>
+                    </div>
+                    <h4>Instant Results</h4>
+                    <p>Get personalized recommendations in seconds</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h4>Unlimited Access</h4>
+                    <p>Discover new music whenever your mood changes</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Mobile Friendly</h4>
+                    <p>Perfect experience on any device, anywhere</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="cta-content">
+                <h2>Ready to Find Your Perfect Soundtrack?</h2>
+                <p>Join thousands of music lovers who've discovered their emotional connection to music</p>
+                <a href="{{ url_for('signup') }}" class="btn btn-primary btn-large">
+                    <i class="fas fa-user-plus"></i>
+                    Create Free Account
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-headphones"></i>
+                    <span>SWARA</span>
+                </div>
+                <p>&copy; 2024 SWARA. Crafted with ❤️ for music lovers.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
+</body>
+</html>

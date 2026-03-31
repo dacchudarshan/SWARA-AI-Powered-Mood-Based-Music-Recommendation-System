@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Mood Selection - SWARA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="{{ url_for('dashboard') }}">
+                        <i class="fas fa-headphones"></i>
+                        <span>SWARA</span>
+                    </a>
+                </div>
+                <div class="nav-user">
+                    <span class="welcome-text">Welcome, {{ session.get('username', 'User') }}!</span>
+                    <a href="{{ url_for('dashboard') }}" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="images-container">
+                <!-- Instructions Section -->
+                <div class="instructions-section" id="instructionsSection">
+                    <header class="images-header">
+                        <h1><i class="fas fa-images"></i> Visual Mood Selection</h1>
+                        <p>Complete 4 rounds of image selection to get accurate mood detection</p>
+                    </header>
+
+                    <div class="instructions-content">
+                        <div class="instruction-card">
+                            <h3><i class="fas fa-lightbulb"></i> How it works:</h3>
+                            <ul>
+                                <li>You'll go through 4 rounds of image selection</li>
+                                <li>In each round, choose the image that best represents your current emotional state</li>
+                                <li>Don't overthink - go with your first instinct</li>
+                                <li>Each round will show different images to capture various aspects of your mood</li>
+                                <li>After all rounds, we'll analyze your selections to determine your overall mood</li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-card">
+                            <h3><i class="fas fa-clock"></i> What to expect:</h3>
+                            <ul>
+                                <li>Round 1: Basic mood indicators (Happy, Sad, Angry, Calm)</li>
+                                <li>Round 2: Energy levels and intensity</li>
+                                <li>Round 3: Social and emotional context</li>
+                                <li>Round 4: Overall emotional state</li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-card">
+                            <h3><i class="fas fa-tips"></i> Tips for accurate results:</h3>
+                            <ul>
+                                <li>Consider your current feelings, not how you want to feel</li>
+                                <li>Look at the colors, shapes, and overall feeling of each image</li>
+                                <li>Trust your gut reaction - it's usually the most accurate</li>
+                                <li>Take a moment to breathe and center yourself before starting</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="startSelection">
+                            <i class="fas fa-play"></i> Start Visual Selection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Selection Rounds -->
+                <div class="selection-rounds hidden" id="selectionRounds">
+                    <header class="images-header">
+                        <h1><i class="fas fa-images"></i> Round <span id="currentRound">1</span> of 4</h1>
+                        <p>Choose the image that best represents your current emotional state</p>
+                    </header>
+
+                    <!-- Progress Bar -->
+                    <div class="round-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="roundProgress"></div>
+                        </div>
+                        <div class="progress-text">Round <span id="roundNumber">1</span> of 4</div>
+                    </div>
+
+                    <!-- Image Selection Grid -->
+                    <div class="image-selection-grid" id="imageGrid">
+                        <!-- Images will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Round Navigation -->
+                    <div class="round-navigation">
+                        <button class="btn btn-secondary" id="previousRound" disabled>
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-primary" id="nextRound" disabled>
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section hidden" id="resultsSection">
+                    <header class="images-header">
+                        <h1><i class="fas fa-chart-bar"></i> Mood Analysis Complete</h1>
+                        <p>Based on your 4 rounds of selections</p>
+                    </header>
+
+                    <div class="results-content">
+                        <div class="mood-summary">
+                            <h3>Detected Mood: <span id="finalMood" class="mood-display">Happy</span></h3>
+                            <p>Confidence: <span id="confidenceLevel">85%</span></p>
+                        </div>
+
+                        <div class="round-breakdown">
+                            <h4>Your Selections:</h4>
+                            <div class="round-selections" id="roundSelections">
+                                <!-- Round selections will be displayed here -->
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="getRecommendations">
+                                <i class="fas fa-music"></i> Get Music Recommendations
+                            </button>
+                            <button class="btn btn-secondary" id="restartSelection">
+                                <i class="fas fa-redo"></i> Start Over
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div class="loading hidden" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your mood selections...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Recommendations Modal -->
+    <div class="modal hidden" id="recommendationsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎵 Your Music Recommendations</h2>
+                <button class="close-btn" onclick="closeRecommendationsModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="recommendationsContent">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/images.js') }}"></script>
+</body>
+</html>

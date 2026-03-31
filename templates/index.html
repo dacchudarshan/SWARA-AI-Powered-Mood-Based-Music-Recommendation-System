@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWARA - Mood-Based Music Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 SWARA</h1>
+            <p>Discover music that matches your mood</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <span class="step active" id="step1">Quiz</span>
+                <span class="step" id="step2">Images</span>
+                <span class="step" id="step3">Puzzle</span>
+                <span class="step" id="step4">Results</span>
+            </div>
+        </div>
+
+        <!-- Module 1: Quiz -->
+        <div class="module active" id="quizModule">
+            <h2>📝 Mood Quiz</h2>
+            <div class="quiz-container">
+                <div class="question active" id="question1">
+                    <h3>How are you feeling right now?</h3>
+                    <div class="options">
+                        <button class="option" data-mood="Happy">Energetic and positive</button>
+                        <button class="option" data-mood="Sad">Down and melancholic</button>
+                        <button class="option" data-mood="Angry">Frustrated and irritated</button>
+                        <button class="option" data-mood="Depressed">Empty and unmotivated</button>
+                    </div>
+                </div>
+                <div class="question" id="question2">
+                    <h3>What would you rather do right now?</h3>
+                    <div class="options">
+                        <button class="option" data-mood="Happy">Dance or exercise</button>
+                        <button class="option" data-mood="Sad">Stay in bed and reflect</button>
+                        <button class="option" data-mood="Angry">Punch something or scream</button>
+                        <button class="option" data-mood="Depressed">Nothing, just sit quietly</button>
+                    </div>
+                </div>
+                <div class="question" id="question3">
+                    <h3>How is your energy level?</h3>
+                    <div class="options">
+                        <button class="option" data-mood="Happy">High and vibrant</button>
+                        <button class="option" data-mood="Sad">Low but emotional</button>
+                        <button class="option" data-mood="Angry">High but tense</button>
+                        <button class="option" data-mood="Depressed">Very low and drained</button>
+                    </div>
+                </div>
+            </div>
+            <button class="next-btn hidden" id="quizNext">Next: Image Selection</button>
+        </div>
+
+        <!-- Module 2: Image Selection -->
+        <div class="module" id="imageModule">
+            <h2>🖼️ Choose an image that represents your mood</h2>
+            <div class="image-grid">
+                <div class="image-card" data-mood="Happy">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23FFD700'/%3E%3Ccircle cx='100' cy='75' r='30' fill='%23FFA500'/%3E%3Ctext x='100' y='130' text-anchor='middle' fill='%23FF6347' font-size='16' font-weight='bold'%3ESunshine%3C/text%3E%3C/svg%3E" alt="Happy sunshine">
+                    <p>Bright Sunshine</p>
+                </div>
+                <div class="image-card" data-mood="Sad">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23778899'/%3E%3Ccircle cx='100' cy='75' r='25' fill='%23696969'/%3E%3Ctext x='100' y='130' text-anchor='middle' fill='%23000080' font-size='16' font-weight='bold'%3ERainy Day%3C/text%3E%3C/svg%3E" alt="Sad rain">
+                    <p>Rainy Day</p>
+                </div>
+                <div class="image-card" data-mood="Angry">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23DC143C'/%3E%3Cpolygon points='100,30 120,70 80,70' fill='%23FF0000'/%3E%3Ctext x='100' y='130' text-anchor='middle' fill='%23FFFFFF' font-size='16' font-weight='bold'%3ELightning%3C/text%3E%3C/svg%3E" alt="Angry storm">
+                    <p>Storm Lightning</p>
+                </div>
+                <div class="image-card" data-mood="Depressed">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%232F4F4F'/%3E%3Ccircle cx='100' cy='75' r='20' fill='%23000000'/%3E%3Ctext x='100' y='130' text-anchor='middle' fill='%23DCDCDC' font-size='16' font-weight='bold'%3EDark Void%3C/text%3E%3C/svg%3E" alt="Depressed darkness">
+                    <p>Dark Void</p>
+                </div>
+            </div>
+            <button class="next-btn hidden" id="imageNext">Next: Puzzle Game</button>
+        </div>
+
+        <!-- Module 3: Tile Puzzle -->
+        <div class="module" id="puzzleModule">
+            <h2>🧩 Tile Removal Puzzle</h2>
+            <p>Remove all numbered tiles by clicking them in ascending order (1, 2, 3...)</p>
+            <div class="puzzle-info">
+                <div>Time: <span id="puzzleTime">0s</span></div>
+                <div>Mistakes: <span id="puzzleMistakes">0</span></div>
+                <div>Next Number: <span id="nextNumber">1</span></div>
+            </div>
+            <div class="puzzle-grid" id="puzzleGrid">
+                <!-- Tiles will be generated by JavaScript -->
+            </div>
+            <div class="puzzle-controls">
+                <button id="startPuzzle" class="control-btn">Start Puzzle</button>
+                <button id="skipPuzzle" class="control-btn secondary">Skip Puzzle</button>
+            </div>
+            <button class="next-btn hidden" id="puzzleNext">Get My Music Recommendations</button>
+        </div>
+
+        <!-- Module 4: Results -->
+        <div class="module" id="resultsModule">
+            <h2>🎶 Your Personalized Music Recommendations</h2>
+            <div class="mood-result">
+                <h3>Detected Mood: <span id="dominantMood"></span></h3>
+                <div class="mood-breakdown">
+                    <small>Quiz: <span id="quizMoodResult"></span> | Images: <span id="imageMoodResult"></span> | Puzzle: <span id="puzzleMoodResult"></span></small>
+                </div>
+            </div>
+            <div class="songs-container" id="songsContainer">
+                <!-- Songs will be loaded here -->
+            </div>
+            <button class="restart-btn" onclick="location.reload()">Start Over</button>
+        </div>
+
+        <!-- Loading indicator -->
+        <div class="loading hidden" id="loading">
+            <div class="spinner"></div>
+            <p>Finding perfect songs for your mood...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
